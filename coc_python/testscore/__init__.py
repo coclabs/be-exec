@@ -40,7 +40,7 @@ def main(verbosity: int = 0):
     # user_source = b'def hello_world():\n\tprint(\'hello world!\')\n\treturn \'hello world!\''
     # user_source_name = '<byte_str>'
 
-    # test wrappers
+    # tests wrappers
     # user_source += b'\nimport testscore'
     # user_source += b'\n'
     # user_source += b'\ntestscore.assert_equal(1, 1)'
