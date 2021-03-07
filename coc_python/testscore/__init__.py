@@ -34,7 +34,7 @@ def assert_equal(actual: Optional[Any], expected: Optional[Any],
     _test_suite.addTest(_testcase_instance)
 
 
-def main(verbosity: int = 0):
+def main(verbosity: int = 0) -> NoReturn:
     # Mock user module
     # user source
     # user_source = b'def hello_world():\n\tprint(\'hello world!\')\n\treturn \'hello world!\''
@@ -58,8 +58,8 @@ def main(verbosity: int = 0):
     _result = _runner.run(_test_suite)
 
     if verbosity > 0:
-        print(_result.errors)
-        print(_result.failures)
-        print(_result.scores)
+        print('errors:', _result.errors)
+        print('failures:', _result.failures)
+        print('successes:', _result.scores)
 
     return _result
