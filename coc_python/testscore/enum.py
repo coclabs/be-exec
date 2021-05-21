@@ -2,5 +2,6 @@ from enum import Enum
 
 
 class ScoringEnum(Enum):
-    PASSONLY = 1
+    ALLPASS = 'all_pass'
+    ANYPASS = 'any_pass'
     INCREMENT = 1

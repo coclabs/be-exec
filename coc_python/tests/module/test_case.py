@@ -1,8 +1,10 @@
+# ================= Example =================
 # import testscore
 # testscore.assert_equal(actual, expected[, pass_score][, fail_score])
 # testscore.assert_equal(hello_world(), 'hello world')
 # testscore.assert_equal(hello_world(), 'hello world', pass_score=5)
 # testscore.assert_equal(hello_world(), 'hello world!', fail_score=1)
+# ===========================================
 
 import testscore
 import random
@@ -19,17 +21,17 @@ def my_cal(_x, _y, _o):
 
 
 # fixed tests
-testscore.assert_equal(calculator.calculate(3, 5, '+'), 8, pass_score=3)
-testscore.assert_equal(calculator.calculate(3, 5, '-'), -2)
-testscore.assert_equal(calculator.calculate(3, 5, '*'), 15)
-testscore.assert_equal(calculator.calculate(3, 5, '/'), 0.6, pass_score=5)
-testscore.assert_equal(calculator.calculate(3, 5, '%'), 3)
+# testscore.assert_equal(calculator.calculate(3, 5, '+'), 8, pass_score=3)
+# testscore.assert_equal(calculator.calculate(3, 5, '-'), -2)
+# testscore.assert_equal(calculator.calculate(3, 5, '*'), 15)
+# testscore.assert_equal(calculator.calculate(3, 5, '/'), 0.6, pass_score=5)
+# testscore.assert_equal(calculator.calculate(3, 5, '%'), 3)
 
 # error tests will not occurs in this releases
 
 # failure tests
-testscore.assert_equal(calculator.calculate(3, 5, '%'), 5)
-testscore.assert_equal(calculator.calculate(3, 5, '-'), -4)
+# testscore.assert_equal(calculator.calculate(3, 5, '%'), 5)
+# testscore.assert_equal(calculator.calculate(3, 5, '-'), -4)
 
 # random tests
 for _ in range(random.randint(2, 5)):
