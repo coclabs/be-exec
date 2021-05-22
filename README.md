@@ -12,5 +12,5 @@ Change workdir to app and execute the below command.
 You can specify app root instead of changing workdir.
 > uvicorn --app-dir /path/to/be-exec main:App.service --reload
 
-You can run on specific port instead of deafult 8000.
+The development server can be listened on specific port instead of default 8000.
 > uvicorn --app-dir /path/to/be-exec main:App.service --reload --port 8080
