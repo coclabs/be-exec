@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 sentry_sdk.init(
-    dsn="https://957e126643af407c94a99b32c263025d@o708708.ingest.sentry.io/5778759",
+    dsn='https://12369f77d5474acdb6908dbeb8daddaf@o525207.ingest.sentry.io/5778800',
     traces_sample_rate=1.0
 )
 
