@@ -29,13 +29,12 @@ jobs:
                     git checkout develop                                   &&
                     git pull                                               &&
                     pip3.9 install -r requirements.txt -c constraints.txt  &&
-                    systemctl start coc-exec.service
+                    systemctl start coc-python-exec.service
       - name: notify discord
         uses: sarisia/actions-status-discord@v1.8.5
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: inject-source
-          description: Deployment successfully via ssh source injection
-          image: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: Development codebase deploy via ssh source injection
           username: GitHub Actions
