@@ -6,7 +6,8 @@ from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 sentry_sdk.init(
     dsn='https://12369f77d5474acdb6908dbeb8daddaf@o525207.ingest.sentry.io/5778800',
-    traces_sample_rate=1.0
+    traces_sample_rate=1.0,
+    environment='develop'
 )
 
 
