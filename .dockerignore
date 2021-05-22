@@ -1,0 +1,11 @@
+# Docker
+Dockerfile
+
+# Python
+/venv
+
+# Git
+.git*
+
+# Jetbrains
+.idea
