@@ -1,6 +1,6 @@
 from typing import Callable
-from ktypes import Typing
-from models import CodeExecResult
+from ktypes import Typing, Union
+from models import CodeExecResult, ErrorMixin
 
 from .controllers import send_pong, execute_code
 
@@ -44,7 +44,7 @@ class Router:
                 POST: {
                     'callback': execute_code,
                     'args': {
-                        'response_model': CodeExecResult
+                        'response_model': Union[CodeExecResult, ErrorMixin],
                     }
                 },
             },

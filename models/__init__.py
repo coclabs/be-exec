@@ -2,6 +2,11 @@ from ktypes import List
 from pydantic import BaseModel
 
 
+class ErrorMixin(BaseModel):
+    code: int
+    reason: str
+
+
 class Code(BaseModel):
     """A schema for code payload"""
 
