@@ -1,9 +1,9 @@
-from ktypes import Any
+from ktypes import Optional, Any
 from models import Code
 from services.code_execute_service import ExecuteService
 
 
-async def send_pong(item: Any):
+async def send_pong(item: Optional[Any]):
     return item
 
 
