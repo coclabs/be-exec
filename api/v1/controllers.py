@@ -8,6 +8,7 @@ async def send_pong(item: Request):
 
 
 async def execute_code(item: Code):
+    common_exceptions = Exception, SystemExit
     try:
         result = ExecuteService(item.code, item.context).service()
         response_data = {
@@ -16,9 +17,8 @@ async def execute_code(item: Code):
             'successes': result.scores,
             'total': result.total
         }
-    except SyntaxError:
+    except common_exceptions:
         import traceback
-        import json
         response_data = {
             'code': 500,
             'reason': traceback.format_exc(limit=0, chain=False)
