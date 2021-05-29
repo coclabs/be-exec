@@ -2,6 +2,10 @@ from ktypes import List
 from pydantic import BaseModel
 
 
+class Any(BaseModel):
+    """Any model"""
+
+
 class Code(BaseModel):
     """A schema for code payload"""
 
