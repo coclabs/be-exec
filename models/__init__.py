@@ -1,4 +1,4 @@
-from typing import List
+from ktypes import List
 from pydantic import BaseModel
 
 

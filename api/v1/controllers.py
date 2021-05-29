@@ -1,8 +1,8 @@
-from models import Code
+from models import Any, Code
 from services.code_execute_service import ExecuteService
 
 
-async def send_pong(item):
+async def send_pong(item: Any):
     return item
 
 
