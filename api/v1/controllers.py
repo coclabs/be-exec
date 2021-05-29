@@ -1,9 +1,10 @@
-from models import Any, Code
+from models import Code
+from fastapi import Request
 from services.code_execute_service import ExecuteService
 
 
-async def send_pong(item: Any):
-    return item
+async def send_pong(item: Request):
+    return await item.json()
 
 
 async def execute_code(item: Code):
