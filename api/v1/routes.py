@@ -6,21 +6,48 @@ from .controllers import send_pong, execute_code
 
 GET = Typing.SupportedHTTPMethod.GET
 POST = Typing.SupportedHTTPMethod.POST
+PUT = Typing.SupportedHTTPMethod.PUT
+PATCH = Typing.SupportedHTTPMethod.PATCH
+DELETE = Typing.SupportedHTTPMethod.DELETE
 
 
 class Router:
     routes = {
         '/': {
-            GET: send_pong
+            'methods': {
+                GET: {
+                    'callback': send_pong,
+                },
+                POST: {
+                    'callback': send_pong,
+                },
+                PUT: {
+                    'callback': send_pong,
+                },
+                PATCH: {
+                    'callback': send_pong,
+                },
+                DELETE: {
+                    'callback': send_pong,
+                },
+            }
         },
         '/api': {
-            GET: lambda: None,
+            'methods': {
+                GET: {
+                    'callback': lambda: None,
+                }
+            }
         },
         '/api/codes': {
-            POST: execute_code,
-            'args': {
-                'response_model': CodeExecResult
-            }
+            'methods': {
+                POST: {
+                    'callback': execute_code,
+                    'args': {
+                        'response_model': CodeExecResult
+                    }
+                },
+            },
         }
     }
 
