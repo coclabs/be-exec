@@ -2,7 +2,7 @@ from typing import Callable
 from ktypes import Typing
 from models import CodeExecResult
 
-from .controllers import execute_code
+from .controllers import send_pong, execute_code
 
 GET = Typing.SupportedHTTPMethod.GET
 POST = Typing.SupportedHTTPMethod.POST
@@ -10,6 +10,9 @@ POST = Typing.SupportedHTTPMethod.POST
 
 class Router:
     routes = {
+        '/': {
+            GET: send_pong
+        },
         '/api': {
             GET: lambda: None,
         },
