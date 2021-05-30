@@ -19,8 +19,17 @@ async def execute_code(item: Code):
         }
     except common_exceptions:
         import traceback
+        import sys
+        exc_limit = -1
+        exc_info = {k: v for k, v in
+                    [(ek, ev) for ek, ev in
+                     zip(['type', 'value', 'tb'],
+                         [ex for ex in sys.exc_info()])]}
+        exc_only = traceback.format_exception_only(exc_info.get('type'), exc_info.get('value'))
+        if len(exc_only) > 1:
+            exc_limit = 0
         response_data = {
             'code': 500,
-            'reason': traceback.format_exc(limit=0, chain=False)
+            'reason': traceback.format_exc(limit=exc_limit, chain=False)
         }
     return response_data

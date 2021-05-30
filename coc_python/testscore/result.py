@@ -50,3 +50,12 @@ class ScoringTestResult(unittest.TestResult):
     def stopTestRun(self) -> NoReturn:
         if self.mode is ScoringEnum.ALLPASS and not self.wasSuccessful():
             self.total = 0
+
+    def _exc_info_to_string(self, err, test):
+        import traceback
+        exc_info = {k: v for k, v in
+                    [(ek, ev) for ek, ev in
+                     zip(['type', 'value', 'tb'],
+                         [ex for ex in err])]}
+        exc_only = traceback.format_exception_only(exc_info.get('type'), exc_info.get('value'))
+        return exc_only[0].strip()
