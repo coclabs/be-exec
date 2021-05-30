@@ -53,9 +53,5 @@ class ScoringTestResult(unittest.TestResult):
 
     def _exc_info_to_string(self, err, test):
         import traceback
-        exc_info = {k: v for k, v in
-                    [(ek, ev) for ek, ev in
-                     zip(['type', 'value', 'tb'],
-                         [ex for ex in err])]}
-        exc_only = traceback.format_exception_only(exc_info.get('type'), exc_info.get('value'))
+        exc_only = traceback.format_exception_only(err[0], err[1])
         return exc_only[0].strip()
