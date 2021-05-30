@@ -41,10 +41,10 @@ def main(code, test, score: ScoringEnum = ScoringEnum.ANYPASS, verbosity: int = 
         _testcase_instance.runTest = MethodType(lambda self: self.assertEqual(actual, expected), _testcase_instance)
         _test_suite.addTest(_testcase_instance)
 
-    _code_object = compile(code, f'<main>', 'exec', optimize=2)
+    _code_object = compile(code, f'<code>', 'exec', optimize=2)
     _test_code_object = compile(test, f'<test>', 'exec', optimize=2)
-    exec(_code_object)
-    exec(_test_code_object)
+    exec(_code_object, locals(), locals())
+    exec(_test_code_object, locals(), locals())
 
     _runner = _test_runner(stream=open(devnull, 'w'), resultclass=_test_result, mode=score)
     _result = _runner.run(_test_suite)
