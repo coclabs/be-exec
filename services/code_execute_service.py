@@ -22,7 +22,7 @@ class ExecuteService(BaseService):
         self.timeout = timeout
 
     def _timeout_handler(self, signum, frame):
-        raise CodeExecutionTimeout(f'Timeout error: {self.timeout}')
+        raise CodeExecutionTimeout(f'Execution time exceeds {self.timeout} seconds')
 
     def _timeout_init(self):
         signal.signal(signal.SIGALRM, self._timeout_handler)

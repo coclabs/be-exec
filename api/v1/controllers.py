@@ -25,9 +25,13 @@ async def execute_code(item: Code):
                     [(ek, ev) for ek, ev in
                      zip(['type', 'value', 'tb'],
                          [ex for ex in sys.exc_info()])]}
-        exc_only = traceback.format_exception_only(exc_info.get('type'), exc_info.get('value'))
+        exc_type = exc_info.get('type')
+        exc_value = exc_info.get('value')
+        exc_only = traceback.format_exception_only(exc_type, exc_value)
         if len(exc_only) > 1:
             exc_limit = 0
+        elif hasattr(exc_type, 'response_tb_limit'):
+            exc_limit = exc_type.response_tb_limit
         response_data = {
             'code': 500,
             'reason': traceback.format_exc(limit=exc_limit, chain=False)
