@@ -35,10 +35,13 @@ def main(code, test, score: ScoringEnum = ScoringEnum.ANYPASS, verbosity: int = 
     @TestCaseDecorator.Scoring(0)
     def assert_equal(actual: Optional[Any], expected: Optional[Any],
                      pass_score: ScoreType, fail_score: ScoreType,
-                     description: str = '', hidden: bool = False) -> NoReturn:
+                     description: str = None, hidden: bool = False) -> NoReturn:
         nonlocal _test_counter
         _test_counter += 1
-        _testcase_instance = _testcase_class(f'testcase-{_test_counter}', pass_score, fail_score, description, hidden)
+        _testcase_name = f'testcase-{_test_counter}'
+        if not description:
+            description = _testcase_name
+        _testcase_instance = _testcase_class(_testcase_name, pass_score, fail_score, description, hidden)
         _testcase_instance.runTest = MethodType(lambda self: self.assertEqual(actual, expected), _testcase_instance)
         _test_suite.addTest(_testcase_instance)
 
