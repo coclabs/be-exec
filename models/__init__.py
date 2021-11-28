@@ -29,17 +29,22 @@ class Code(BaseModel):
 class CodeExecResult(BaseModel):
     class CodeExecError(BaseModel):
         case: str
+        score: float
         reason: str
+        description: str
+        hidden: bool
 
     class CodeExecFailure(BaseModel):
         case: str
         reason: str
         score: float
+        description: str
         hidden: bool
 
     class CodeExecSuccess(BaseModel):
         case: str
         score: float
+        description: str
         hidden: bool
 
     errors: List[CodeExecError]
