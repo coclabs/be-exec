@@ -27,13 +27,17 @@ class ScoringTestResult(unittest.TestResult):
         self.scores.append({
             'case': test.test_name,
             'score': test.pass_score,
+            'description': test.test_description,
             'hidden': test.test_hidden
         })
 
     def addError(self, test, err):
         self.errors.append({
             'case': test.test_name,
-            'reason': self._exc_info_to_string(err, test)
+            'reason': self._exc_info_to_string(err, test),
+            'score': test.fail_score,
+            'description': test.test_description,
+            'hidden': test.test_hidden
         })
         # self._mirrorOutput = True
 
@@ -43,6 +47,7 @@ class ScoringTestResult(unittest.TestResult):
             'case': test.test_name,
             'reason': self._exc_info_to_string(err, test),
             'score': test.fail_score,
+            'description': test.test_description,
             'hidden': test.test_hidden
         })
         # self._mirrorOutput = True
