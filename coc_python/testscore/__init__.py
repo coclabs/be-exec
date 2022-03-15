@@ -13,11 +13,12 @@ from .decorator import TestCaseDecorator
 class _TestCodeScore(TestCase):
     """"""
 
-    def __init__(self, test_name, pass_score, fail_score, test_hidden, *args, **kwargs) -> NoReturn:
+    def __init__(self, test_name, pass_score, fail_score, test_description, test_hidden, *args, **kwargs) -> NoReturn:
         super().__init__(*args, **kwargs)
         self.test_name = test_name
         self.pass_score = pass_score
         self.fail_score = fail_score
+        self.test_description = test_description
         self.test_hidden = test_hidden
 
 
@@ -34,17 +35,20 @@ def main(code, test, score: ScoringEnum = ScoringEnum.ANYPASS, verbosity: int = 
     @TestCaseDecorator.Scoring(0)
     def assert_equal(actual: Optional[Any], expected: Optional[Any],
                      pass_score: ScoreType, fail_score: ScoreType,
-                     hidden: bool = False) -> NoReturn:
+                     description: str = None, hidden: bool = False) -> NoReturn:
         nonlocal _test_counter
         _test_counter += 1
-        _testcase_instance = _testcase_class(f'testcase-{_test_counter}', pass_score, fail_score, hidden)
+        _testcase_name = f'testcase-{_test_counter}'
+        if not description:
+            description = _testcase_name
+        _testcase_instance = _testcase_class(_testcase_name, pass_score, fail_score, description, hidden)
         _testcase_instance.runTest = MethodType(lambda self: self.assertEqual(actual, expected), _testcase_instance)
         _test_suite.addTest(_testcase_instance)
 
-    _code_object = compile(code, f'<main>', 'exec', optimize=2)
+    _code_object = compile(code, f'<code>', 'exec', optimize=2)
     _test_code_object = compile(test, f'<test>', 'exec', optimize=2)
-    exec(_code_object)
-    exec(_test_code_object)
+    exec(_code_object, locals(), locals())
+    exec(_test_code_object, locals(), locals())
 
     _runner = _test_runner(stream=open(devnull, 'w'), resultclass=_test_result, mode=score)
     _result = _runner.run(_test_suite)

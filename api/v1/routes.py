@@ -1,23 +1,53 @@
 from typing import Callable
-from ktypes import Typing
-from models import CodeExecResult
+from ktypes import Typing, Union
+from models import CodeExecResult, ErrorMixin
 
-from .controllers import execute_code
+from .controllers import send_pong, execute_code
 
 GET = Typing.SupportedHTTPMethod.GET
 POST = Typing.SupportedHTTPMethod.POST
+PUT = Typing.SupportedHTTPMethod.PUT
+PATCH = Typing.SupportedHTTPMethod.PATCH
+DELETE = Typing.SupportedHTTPMethod.DELETE
 
 
 class Router:
     routes = {
+        '/': {
+            'methods': {
+                GET: {
+                    'callback': send_pong,
+                },
+                POST: {
+                    'callback': send_pong,
+                },
+                PUT: {
+                    'callback': send_pong,
+                },
+                PATCH: {
+                    'callback': send_pong,
+                },
+                DELETE: {
+                    'callback': send_pong,
+                },
+            }
+        },
         '/api': {
-            GET: lambda: None,
+            'methods': {
+                GET: {
+                    'callback': lambda: None,
+                }
+            }
         },
         '/api/codes': {
-            POST: execute_code,
-            'args': {
-                'response_model': CodeExecResult
-            }
+            'methods': {
+                POST: {
+                    'callback': execute_code,
+                    'args': {
+                        'response_model': Union[CodeExecResult, ErrorMixin],
+                    }
+                },
+            },
         }
     }
 

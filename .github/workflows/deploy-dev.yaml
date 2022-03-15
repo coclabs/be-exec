@@ -1,0 +1,40 @@
+name: Deploy-Dev
+on:
+  push:
+    branches:
+      - develop
+#  pull_request:
+#    branches:
+#      - develop
+#    types: [closed]
+jobs:
+  inject-source:
+#    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    environment:
+      name: Develop
+    steps:
+      - name: execute commands via ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_MACHINE }}
+          username: ${{ secrets.DEV_USER }}
+          password: ${{ secrets.DEV_PASSWD }}
+          port: ${{ secrets.PORT }}
+          script: systemctl stop coc-python-exec.service                   ;
+                    cd /srv                                                &&
+                    rm -rf be-exec                                         &&
+                    git clone https://github.com/coclabs/be-exec.git       &&
+                    cd be-exec                                             &&
+                    git checkout develop                                   &&
+                    git pull                                               &&
+                    pip3.9 install -r requirements.txt -c constraints.txt  &&
+                    systemctl start coc-python-exec.service
+      - name: notify discord
+        uses: sarisia/actions-status-discord@v1.8.5
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: deploy dev be-exec
+          description: Development codebase deploy via ssh source injection
+          username: GitHub Actions

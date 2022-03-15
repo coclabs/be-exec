@@ -10,11 +10,12 @@ contains method calculate that capable of producing output of simple formula and
 simple operation includes +, -, *, /, %.
 
 Example test cases
-> assert_equal(calculator.calculate(x, y, '+', z)
-> assert_equal(calculator.calculate(x, y, '-', z)
-> assert_equal(calculator.calculate(x, y, '*', z)
-> assert_equal(calculator.calculate(x, y, '/', z)
-> assert_equal(calculator.calculate(x, y, '%', z)
+> x, y, z = 1, 2, 3
+> assert_equal(actual=calculator.calculate(x, y, '+'), expected=x+y, pass_score=z)
+> assert_equal(actual=calculator.calculate(x, y, '-'), expected=x-y, pass_score=z)
+> assert_equal(actual=calculator.calculate(x, y, '*'), expected=x*y, pass_score=z)
+> assert_equal(actual=calculator.calculate(x, y, '/'), expected=x/y, pass_score=z)
+> assert_equal(actual=calculator.calculate(x, y, '%'), expected=x%y, pass_score=z)
 """
 
 # Simple solution
@@ -48,3 +49,7 @@ class Calculator:
     def calculate(self, _x: SimpleNumber, _y: SimpleNumber, _o: str) -> Number:
         operation = self.Operator(_o)
         return operation.operate(_x, _y)
+
+
+calculator = Calculator()
+print(calculator.calculate(3, 2, '%'))
